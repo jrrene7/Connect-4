@@ -1,22 +1,27 @@
 jQuery(function() {
 	console.log('jQuery is up and running');
 var connectFour = {
-	let slots: [],
- let playerOne:  true,
- let movesMade: 0,
-let $board: $('<div class="board"></div>');,
+	column: 7,
+	row: 6,
+	slots: [],
+  playerOne:  true,
+  movesMade: 0,
+  $board: $('<div class="board"></div>'),
 
-board: function(){
-  let $board = $('.board');
+
+makeBoard: function(){
+ let $board = $('.board');
  	connectFour.slots = [];
-  for(var row = 0; row < 6; r++){
-     var $row = $('<div class="row"></div>').appendTo($board);
-          for(var column = 0; column < 7; c++){
-            var $tile = $('<div class="slot"></div>').appendTo($row);
+  for(var column = 0; column < connectFour.column; column++){
+     var $column = $('<div class="column"></div>').appendTo('.board');
+        for(var row = 0; row < connectFour.row; row++){
+          var $slot = $('<div class="slot"></div>').width(25).appendTo($column);
+          	var slot = connectFour.makeSlots(row, column, $slot);
+      		    connectFour.slots.push(slot);
 
   }}},
 
-slots: function(row, column, value){
+makeSlots: function(row, column, value){
 return {
 	result: '',
 	column: column,
@@ -40,24 +45,28 @@ let slot = connectFour.slots.find(function(){
 //The toString() method returns a string representing the object. (MDN).
 })},
 
-whoWon: function(){
 
+// whoWon: function(){
+
+
+// }
+
+// isItTied: function(){
+
+
+
+// }
+
+// clearBoard: function(){
+
+// }
 
 }
 
-isItTied: function(){
+connectFour.makeBoard();
+connectFour.makeSlots();
+// connectFour.playerTurn();
 
-
-
-}
-
-clearBoard: function(){
-
-
-
-}
-
-}
 }); //JQUERY ENDS!
 
 
