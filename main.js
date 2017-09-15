@@ -4,8 +4,9 @@ var connectFour = {
 	column: 7,
 	row: 6,
 	slots: [],
-  whosTurnIsIt: "red",
-  movesMade: 0,
+  whosTurnIsIt: true,
+  movesMadeByRed: [],
+  movesMadeByBlue: [],
   $board: $('<div class="board"></div>'),
 
 
@@ -16,22 +17,30 @@ makeBoard: function(){
 	     	var $column = $('<div class="column"></div>').appendTo('.board');
 	      for(var row = 0; row < connectFour.row; row++){
 	        var $slot = $('<div class="slot"></div>')
-	        									.appendTo($column)
+	        									.attr("id", column.toString() + row.toString())
+														.appendTo($column)
+	        									//add event listener as the slots are created which will switch whos turn it is.
 	        									.click(function(event){
-	        											if (connectFour.whosTurnIsIt === "red") {
+	        											if (connectFour.whosTurnIsIt === true) {
 	        												$(event.target).css('background-color','red');
 	        												connectFour.whosTurnIsIt = "blue";
+	        												connectFour.movesMadeByRed.push(event.target.id)
+	        												console.log(connectFour.movesMadeByRed);
+
 	        											} else {
         													$(event.target).css('background-color','blue');
-	        												connectFour.whosTurnIsIt = "red";
-	        											}
+	        												connectFour.whosTurnIsIt = true;
+	        												connectFour.movesMadeByBlue.push(event.target.id)
+	        												console.log(connectFour.movesMadeByBlue);
 
+	        											}
 														 });
 	      	
 	      	var slot = connectFour.makeSlots(row, column, $slot);
 			    connectFour.slots.push(slot);
 				}
 		}
+
 	},
 
 makeSlots: function(row, column, value){
@@ -43,23 +52,26 @@ return {
 	value: value,
 	make: function(){
 		connectFour.value.text(connectFour.value);
-	}}},
-
-
-// switchTurns: function(event) {
-// 	let $makeSelection = $('event.target').on('click', connectFour.switchTurns); 
-
-
-playerOne: function() {
-	let $slot = $('<div class="slot"><div>');
-	let board = $('.board');
-	//board.on('click', $slot, function(event){
-	//	$(event.target).css('background-color','red');
-	//})
-	
+		}
+	}
 },
 
-// function playerTwo() {
+whoWon: function(){
+	$selected = $('click')
+
+
+}
+
+
+// playerOne: function() {
+// 	let $slot = $('<div class="slot"><div>');
+// 	let board = $('.board');
+// 	//board.on('click', $slot, function(event){
+// 	//	$(event.target).css('background-color','red');
+// 	//})
+	
+// },
+// playerTwo: function() {
 // 	let $slot = $('<div class="slot"><div>');
 // 	let board = $('.board');
 // 	board.on('click', $slot, function(event){
@@ -69,18 +81,11 @@ playerOne: function() {
 // },
 
 
-
 // //The find() method returns the value of the first element in the array that satisfies the provided testing function. 
 // //Otherwise undefined is returned. (MDN)
 // //The toString() method returns a string representing the object. (MDN).
 // // })
 // },
-
-
-// whoWon: function(){
-
-
-// }
 
 // isItTied: function(){
 
@@ -88,17 +93,11 @@ playerOne: function() {
 
 // }
 
-// clearBoard: function(){
-
-// }
-
 }
 
 connectFour.makeBoard();
 connectFour.makeSlots();
-connectFour.playerOne();
 // connectFour.playerTurn();
-
 }); //JQUERY ENDS!
 
 
