@@ -6,17 +6,17 @@ var connectFour = {
 	slots: [],
   whosTurnIsIt: true,
   movesMadeByRed: [],
-  movesMadeByBlue: [],
+  movesMadeByBlack: [],
   $board: $('<div class="board"></div>'),
 
 
 makeBoard: function(){
-	 let $board = $('.board');
+	 let $board = $('.board').css('background-color', 'yellow');
 	 	connectFour.slots = [];
 	  for(var column = 0; column < connectFour.column; column++){
-	     	var $column = $('<div class="column"></div>').appendTo('.board');
+	     	var $column = $('<div class="column"></div>').css('background-color', 'blue').appendTo('.board');
 	      for(var row = 0; row < connectFour.row; row++){
-	        var $slot = $('<div class="slot"></div>')
+	        var $slot = $('<div class="slot"></div>').css('background-color', 'white')
 	        									.attr("id", column.toString() + row.toString())
 														.appendTo($column)
 	        									//add event listener as the slots are created which will switch whos turn it is.
@@ -25,17 +25,17 @@ makeBoard: function(){
 	        												$(event.target).css('background-color','red');
 	        												connectFour.whosTurnIsIt = "blue";
 	        												connectFour.movesMadeByRed.push(event.target.id)
-	        												 var  number = parseInt(event.target.id.length);
+	        												 //var  number = parseInt(event.target.id.length);
 	        												console.log(connectFour.movesMadeByRed);
-	        												 console.log(number);
+	        												 //console.log(number);
 
 	        											} else {
-        													$(event.target).css('background-color','blue');
+        													$(event.target).css('background-color','black');
 	        												connectFour.whosTurnIsIt = true;
-	        												connectFour.movesMadeByBlue.push(event.target.id)
-	        												var number = parseInt(event.target.id.length);
-	        												console.log(connectFour.movesMadeByBlue);
-	        											  console.log(number);
+	        												connectFour.movesMadeByBlack.push(event.target.id)
+	        												//var number = parseInt(event.target.id.length);
+	        												console.log(connectFour.movesMadeByBlack);
+	        											  //console.log(number);
 
 	        											}
 														 });
@@ -69,6 +69,14 @@ isBlueWin: function(){
 
 	return true;
 },
+
+
+getSlotByRowAndColumn: function(row, column){
+
+	return document.querySelector(`*[id="${row}${column}"]`)
+	console.log(getSlotByRowAndColumn());
+},
+
 
 // whoWon: function(row, column, slots){
 // movements = [
@@ -118,11 +126,10 @@ isBlueWin: function(){
 // //The find() method returns the value of the first element in the array that satisfies the provided testing function. 
 // //Otherwise undefined is returned. (MDN)
 // //The toString() method returns a string representing the object. (MDN).
-// // })
-// },
+// // 
 
  // isItTied: function(){
-	// if(connectFour.movesMadeByBlue &&
+	// if(connectFour.movesMadeByBlack &&
 	// 	 connectFour.movesMadeByRed === connectFour.slots.length){
  //        setTimeout(function(){
  //          alert('No one won! its a tie!');
@@ -136,7 +143,7 @@ isBlueWin: function(){
 
 connectFour.makeBoard();
 connectFour.makeSlots();
-// connectFour.playerTurn();
+connectFour.getSlotByRowAndColumn();
 }); //JQUERY ENDS!
 
 
