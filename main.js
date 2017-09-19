@@ -23,6 +23,7 @@ makeBoard: function(){
 	        									.attr("id", column.toString() + row.toString())
 														.appendTo($column)
 	        									//add event listener as the slots are created which will switch whos turn it is.
+	        									//Todd showed me a way in which that I didnt have to add functions for switching turns.
 	        									.click(function(event){
 	        											if (connectFour.playerTurn === true) {
 	        												$(event.target).css('background-color','red');
@@ -43,16 +44,11 @@ makeBoard: function(){
 	        												 								 connectFour.checkForWinVerticalGoingDown(event.target);
 
 	        											if (thereWasAWin){
-	        												alert('you win!');
+	        													alert('you win!');
 	        											} else {
 	        												console.log('no win');
 	        											}
-	        											// var verticalWin = connectFour.checkForWinVertical(event.target);
-	        											// if (verticalWin){
-	        											// 	console.log('you win!');
-	        											// } else {
-	        											// 	console.log('no win');
-	        											// }
+	        										
 														 });
 	      	
 	      	var slot = connectFour.makeSlots(row, column, $slot);
@@ -231,10 +227,10 @@ var diagonal = this.getDiagonal(lastElementClicked);
 	}
 	if (rightCount === 4) {
 		return true;
-	} 				else {
-										console.log("rightCount:", rightCount);
-										console.log('debuggingArray:', debuggingArray);
-						}
+	} else {
+					console.log("rightCount:", rightCount);
+					console.log('debuggingArray:', debuggingArray);
+				}
 		},
 
 },

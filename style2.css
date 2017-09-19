@@ -14,9 +14,9 @@ opacity: 0.8;
 margin: 0;
 margin-left: 380px;
 margin-top: 80px;
-padding-top: 40px;
+padding-top: 55px;
 width: 400px;
-height: 300px;
+height: 350px;
 
 
 }
@@ -28,7 +28,7 @@ ul {
 }
 
 p {
-	color: purple;
+	color: white;
 	opacity: 1.0
 
 	font-family: blippo fantasy;
