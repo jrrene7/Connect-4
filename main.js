@@ -38,10 +38,11 @@ makeBoard: function(){
 	        												console.log(connectFour.movesMadeByYellow);
 
 	        											}
-	        											var thereWasAWin = connectFour.checkForWinHorizontalGoingLeft(event.target) || 
-	        											   								 connectFour.checkForWinHorizontalGoingRight(event.target) ||
-	        												 								 connectFour.checkForWinVerticalGoingUp(event.target) ||
-	        												 								 connectFour.checkForWinVerticalGoingDown(event.target);
+	        											var thereWasAWin = connectFour.checkForWinDiagonal
+	        											// connectFour.checkForWinHorizontalGoingLeft(event.target) || 
+	        											//    								 connectFour.checkForWinHorizontalGoingRight(event.target) ||
+	        											// 	 								 connectFour.checkForWinVerticalGoingUp(event.target) ||
+	        											// 	 								 connectFour.checkForWinVerticalGoingDown(event.target);
 
 	        											if (thereWasAWin){
 	        													alert('you win!');
@@ -92,7 +93,7 @@ getColumn: function(element){
 
 getDiagonal: function(element){
 	var id = element.id;
-	return Number(id.charAt(0)) + Number(id.charAt(1));
+	return Number(id);
 },
 
 getColor: function(element) {
@@ -126,98 +127,99 @@ isSameColor: function(el1, el2) {
 // 	// END section worked on with Tims
 // },
 
-checkForWinHorizontalGoingLeft(lastElementClicked){
-	var column = this.getColumn(lastElementClicked);
-	var rightCount = 0;
-	var debuggingArray = [];
-	for(var potentialCol = column; potentialCol < (4 + column); potentialCol++){
-		var potentialElement = this.getSlotByRowAndColumn(this.getRow(lastElementClicked), potentialCol);
-		debuggingArray.push(potentialElement);
-		if(this.isSameColor(lastElementClicked, potentialElement)) {
-			rightCount++;
-		} else {
-			break;
-		}
-	}
-	if (rightCount === 4) {
-		return true;
-	} else {
-		console.log("rightCount:", rightCount);
-		console.log('debuggingArray:', debuggingArray);
-	}
-},
+// checkForWinHorizontalGoingLeft(lastElementClicked){
+// 	var column = this.getColumn(lastElementClicked);
+// 	var rightCount = 0;
+// 	var debuggingArray = [];
+// 	for(var potentialCol = column; potentialCol < (4 + column); potentialCol++){
+// 		var potentialElement = this.getSlotByRowAndColumn(this.getRow(lastElementClicked), potentialCol);
+// 		debuggingArray.push(potentialElement);
+// 		if(this.isSameColor(lastElementClicked, potentialElement)) {
+// 			rightCount++;
+// 		} else {
+// 			break;
+// 		}
+// 	}
+// 	if (rightCount === 4) {
+// 		return true;
+// 	} else {
+// 		console.log("rightCount:", rightCount);
+// 		console.log('debuggingArray:', debuggingArray);
+// 	}
+// },
 
-checkForWinHorizontalGoingRight(lastElementClicked){
-	var column = this.getColumn(lastElementClicked);
-	var rightCount = 0;
-	var debuggingArray = [];
-	for(var potentialCol = column; potentialCol < (4 + column); potentialCol--){
-		var potentialElement = this.getSlotByRowAndColumn(this.getRow(lastElementClicked), potentialCol);
-		debuggingArray.push(potentialElement);
-		if(this.isSameColor(lastElementClicked, potentialElement)) {
-			rightCount++;
-		} else {
-			break;
-		}
-	}
-	if (rightCount === 4) {
-		return true;
-	} else {
-		console.log("rightCount:", rightCount);
-		console.log('debuggingArray:', debuggingArray);
-	}
-},
+// checkForWinHorizontalGoingRight(lastElementClicked){
+// 	var column = this.getColumn(lastElementClicked);
+// 	var rightCount = 0;
+// 	var debuggingArray = [];
+// 	for(var potentialCol = column; potentialCol < (4 + column); potentialCol--){
+// 		var potentialElement = this.getSlotByRowAndColumn(this.getRow(lastElementClicked), potentialCol);
+// 		debuggingArray.push(potentialElement);
+// 		if(this.isSameColor(lastElementClicked, potentialElement)) {
+// 			rightCount++;
+// 		} else {
+// 			break;
+// 		}
+// 	}
+// 	if (rightCount === 4) {
+// 		return true;
+// 	} else {
+// 		console.log("rightCount:", rightCount);
+// 		console.log('debuggingArray:', debuggingArray);
+// 	}
+// },
 
-checkForWinVerticalGoingUp(lastElementClicked){
-	var row = this.getRow(lastElementClicked);
-	var rightCount = 0;
-	var debuggingArray = [];
-	for(var potentialRow = row; potentialRow < (4 + row); potentialRow++){
-		var potentialElement = this.getSlotByRowAndColumn(potentialRow, this.getColumn(lastElementClicked));
-		debuggingArray.push(potentialElement);
-		if(this.isSameColor(lastElementClicked, potentialElement)) {
-			rightCount++;
-		} else {
-			break;
-		}
-	}
-	if (rightCount === 4) {
-		return true;
-	} else {
-		console.log("rightCount:", rightCount);
-		console.log('debuggingArray:', debuggingArray);
-	}
-},
+// checkForWinVerticalGoingUp(lastElementClicked){
+// 	var row = this.getRow(lastElementClicked);
+// 	var rightCount = 0;
+// 	var debuggingArray = [];
+// 	for(var potentialRow = row; potentialRow < (4 + row); potentialRow++){
+// 		var potentialElement = this.getSlotByRowAndColumn(potentialRow, this.getColumn(lastElementClicked));
+// 		debuggingArray.push(potentialElement);
+// 		if(this.isSameColor(lastElementClicked, potentialElement)) {
+// 			rightCount++;
+// 		} else {
+// 			break;
+// 		}
+// 	}
+// 	if (rightCount === 4) {
+// 		return true;
+// 	} else {
+// 		console.log("rightCount:", rightCount);
+// 		console.log('debuggingArray:', debuggingArray);
+// 	}
+// },
 
 
-checkForWinVerticalGoingDown(lastElementClicked){
-	var row = this.getRow(lastElementClicked);
-	var rightCount = 0;
-	var debuggingArray = [];
-	for(var potentialRow = row; potentialRow < (4 + row); potentialRow--){
-		var potentialElement = this.getSlotByRowAndColumn(potentialRow, this.getColumn(lastElementClicked));
-		debuggingArray.push(potentialElement);
-		if(this.isSameColor(lastElementClicked, potentialElement)) {
-			rightCount++;
-		} else {
-			break;
-		}
-	}
-	if (rightCount === 4) {
-		return true;
-	} else {
-		console.log("rightCount:", rightCount);
-		console.log('debuggingArray:', debuggingArray);
-	}
-},
+// checkForWinVerticalGoingDown(lastElementClicked){
+// 	var row = this.getRow(lastElementClicked);
+// 	var rightCount = 0;
+// 	var debuggingArray = [];
+// 	for(var potentialRow = row; potentialRow < (4 + row); potentialRow--){
+// 		var potentialElement = this.getSlotByRowAndColumn(potentialRow, this.getColumn(lastElementClicked));
+// 		debuggingArray.push(potentialElement);
+// 		if(this.isSameColor(lastElementClicked, potentialElement)) {
+// 			rightCount++;
+// 		} else {
+// 			break;
+// 		}
+// 	}
+// 	if (rightCount === 4) {
+// 		return true;
+// 	} else {
+// 		console.log("rightCount:", rightCount);
+// 		console.log('debuggingArray:', debuggingArray);
+// 	}
+// },
 
 
 checkForWinDiagonal(lastElementClicked){
-var diagonal = this.getDiagonal(lastElementClicked);
+	var row = this.getRow(lastElementClicked);
+	var column = this.getColumn(lastElementClicked);
 	var rightCount = 0;
 	var debuggingArray = [];
-	for(var potentialCol = diagonal; potentialCol < (4 + diagonal); potentialCol++){
-		var potentialElement = this.getSlotByRowAndColumn(this.getDiagonal(lastElementClicked), potentialCol);
+	for(var potentialCol = row + column; potentialCol < (4 + (row + column)); potentialCol++){
+		var potentialElement = this.getSlotByRowAndColumn(potentialCol, this.getDiagonal(lastElementClicked));
 		debuggingArray.push(potentialElement);
 		if(this.isSameColor(lastElementClicked, potentialElement)) {
 			rightCount++;

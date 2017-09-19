@@ -38,5 +38,9 @@ CSS to add some style to both pages. (LANDING AND GAME PAGES)
 
 Javascript & JQuery to add logic to my game. =(
 
+@@@@ UNSOLVED PROBLEMS @@@@
+
+Checking for wins diagonally, checking for a tie, drop down effects, additional game options, a reset button. 
+
 
 
