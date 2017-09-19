@@ -9,7 +9,7 @@
 
 #### INSTRUCTIONS ####
 
-Connect four is a two player game, so select who goes first. To win Connect Four, all you have to do is connect four of your colored checker pieces in a row. This can be done in four different directions which are: horizontal, vertical or diagonal (either direction). Each player will drop in one checker piece at a time. This will give you a chance to either add on to your row, or block the other players chances from getting four in a row. The game can be over on two seperate occasions, when you or the other player get four in a row, or when all slots are filled, resulting in a draw. If you decide to play again, the loser usually goes first. You can simply restart the game by refreshing the age or hitting the reset button.
+Connect four is a two player game, so select who goes first. To win Connect Four, all you have to do is connect four of your colored checker pieces in a row. This can be done in four different directions which are: horizontal, vertical or diagonal (either direction). Each player will insert in one checker piece at a time. This will give you a chance to either add on to your row, or block the other players chances from getting four in a row. The game can be over on two seperate occasions, when you or the other player get four in a row, or when all slots are filled, resulting in a draw. If you decide to play again, the loser usually goes first. You can simply restart the game by refreshing the age or hitting the reset button.
 
 
 

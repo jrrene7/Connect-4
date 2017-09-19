@@ -37,12 +37,22 @@ makeBoard: function(){
 	        												console.log(connectFour.movesMadeByYellow);
 
 	        											}
-	        											var thereWasAWin = connectFour.checkForWin(event.target);
+	        											var thereWasAWin = connectFour.checkForWinHorizontalGoingLeft(event.target) || 
+	        											   								 connectFour.checkForWinHorizontalGoingRight(event.target) ||
+	        												 								 connectFour.checkForWinVerticalGoingUp(event.target) ||
+	        												 								 connectFour.checkForWinVerticalGoingDown(event.target);
+
 	        											if (thereWasAWin){
-	        												console.log('you win!');
+	        												alert('you win!');
 	        											} else {
 	        												console.log('no win');
 	        											}
+	        											// var verticalWin = connectFour.checkForWinVertical(event.target);
+	        											// if (verticalWin){
+	        											// 	console.log('you win!');
+	        											// } else {
+	        											// 	console.log('no win');
+	        											// }
 														 });
 	      	
 	      	var slot = connectFour.makeSlots(row, column, $slot);
@@ -53,7 +63,7 @@ makeBoard: function(){
 	},
 
 makeSlots: function(row, column, value){
-	//in order to create a slot, you will need to get its position and what is there,
+	//in order to create a slot, you will need to get its position and it's value,
 return {
 	result: '',
 	column: column,
@@ -65,38 +75,6 @@ return {
 	}
 },
 
-// switchTurn: function(event){
-//       // remove event listener
-//       var $clicked = $(event.target).off('click', connectFour.makeBoard);
-//       //get row from tile
-//       var row = $clicked.attr('data-row');
-//       var column = $clicked.attr('data-column');
-//       // get tile
-//       var slot = connectFour.slots.find(function(slot){
-//         return slot.row.toString() === row && slot.column.toString() === column;
-//       })
-
-//       slot.value = connectFour.playerTurn;
-
-//       slot.make();
-
-//       // check for wins
-//       connectFour.whoWon(row, column);
-//       // switch turn
-//       connectFour.playerTurn = connectFour.playerTurn === 'red' ? 'yellow' : 'red';
-//       $('#playerTurn').text(connectFour.playerTurn);
-
-//     },
-
-
-isRedWin: function(){
-
-	return true;
-},
-isYellowWin: function(){
-
-	return true;
-},
 
 
 getSlotByRowAndColumn: function(row, column){
@@ -116,6 +94,11 @@ getColumn: function(element){
 	return Number(id.charAt(0));
 },
 
+getDiagonal: function(element){
+	var id = element.id;
+	return Number(id.charAt(0)) + Number(id.charAt(1));
+},
+
 getColor: function(element) {
 	return $(element).css('background-color');
 },
@@ -124,8 +107,30 @@ isSameColor: function(el1, el2) {
 	return this.getColor(el1) === this.getColor(el2);
 },
 
-checkForWin(lastElementClicked){
-	// BEGIN section worked on with tims
+// checkForWinHorizontal(lastElementClicked){
+// 	// BEGIN section worked on with tims
+// 	var column = this.getColumn(lastElementClicked);
+// 	var rightCount = 0;
+// 	var debuggingArray = [];
+// 	for(var potentialCol = column; potentialCol < (4 + column); potentialCol++){
+// 		var potentialElement = this.getSlotByRowAndColumn(this.getRow(lastElementClicked), potentialCol);
+// 		debuggingArray.push(potentialElement);
+// 		if(this.isSameColor(lastElementClicked, potentialElement)) {
+// 			rightCount++;
+// 		} else {
+// 			break;
+// 		}
+// 	}
+// 	if (rightCount === 4) {
+// 		return true;
+// 	} else {
+// 		console.log("rightCount:", rightCount);
+// 		console.log('debuggingArray:', debuggingArray);
+// 	}
+// 	// END section worked on with Tims
+// },
+
+checkForWinHorizontalGoingLeft(lastElementClicked){
 	var column = this.getColumn(lastElementClicked);
 	var rightCount = 0;
 	var debuggingArray = [];
@@ -144,55 +149,95 @@ checkForWin(lastElementClicked){
 		console.log("rightCount:", rightCount);
 		console.log('debuggingArray:', debuggingArray);
 	}
-	// END section worked on with Tims
 },
 
-// whoWon: function(row, column, slots){
-// movements = [
-//       { x: 0, y: 1  }, // vertical
-//       { x: 1, y: 0  }, // horizontal
-//       { x: 1, y: 1  }, // diagRight
-//       { x: 1, y: -1 }  // diaglLeft
-//     ];
-// let x = movements.x;
-// let y = movements.y;
+checkForWinHorizontalGoingRight(lastElementClicked){
+	var column = this.getColumn(lastElementClicked);
+	var rightCount = 0;
+	var debuggingArray = [];
+	for(var potentialCol = column; potentialCol < (4 + column); potentialCol--){
+		var potentialElement = this.getSlotByRowAndColumn(this.getRow(lastElementClicked), potentialCol);
+		debuggingArray.push(potentialElement);
+		if(this.isSameColor(lastElementClicked, potentialElement)) {
+			rightCount++;
+		} else {
+			break;
+		}
+	}
+	if (rightCount === 4) {
+		return true;
+	} else {
+		console.log("rightCount:", rightCount);
+		console.log('debuggingArray:', debuggingArray);
+	}
+},
 
-//     if(connectFour.movesMadeByRed[i] === movements[0] * 3 || 
-//     connectFour.movesMadeByRed[i] === movements[1] * 3 || 
-//     connectFour.movesMadeByRed[i] === movements[2] * 3 ||
-//     connectFour.movesMadeByRed[i] === movements[3] * 3){
-//     	console.log("Red Has Won!")
+checkForWinVerticalGoingUp(lastElementClicked){
+	var row = this.getRow(lastElementClicked);
+	var rightCount = 0;
+	var debuggingArray = [];
+	for(var potentialRow = row; potentialRow < (4 + row); potentialRow++){
+		var potentialElement = this.getSlotByRowAndColumn(potentialRow, this.getColumn(lastElementClicked));
+		debuggingArray.push(potentialElement);
+		if(this.isSameColor(lastElementClicked, potentialElement)) {
+			rightCount++;
+		} else {
+			break;
+		}
+	}
+	if (rightCount === 4) {
+		return true;
+	} else {
+		console.log("rightCount:", rightCount);
+		console.log('debuggingArray:', debuggingArray);
+	}
+},
 
-//      } else {
 
-//     	if(connectFour.movesMadeByBlack[i] = movements[0] * 3 || 
-//     connectFour.movesMadeByBlack[i] = movements[1] * 3 || 
-//     connectFour.movesMadeByBlack[i] = movements[2] * 3 ||
-//     connectFour.movesMadeByBlack[i] = movements[3] * 3);
-// 			console.log("black Has Won");
+checkForWinVerticalGoingDown(lastElementClicked){
+	var row = this.getRow(lastElementClicked);
+	var rightCount = 0;
+	var debuggingArray = [];
+	for(var potentialRow = row; potentialRow < (4 + row); potentialRow--){
+		var potentialElement = this.getSlotByRowAndColumn(potentialRow, this.getColumn(lastElementClicked));
+		debuggingArray.push(potentialElement);
+		if(this.isSameColor(lastElementClicked, potentialElement)) {
+			rightCount++;
+		} else {
+			break;
+		}
+	}
+	if (rightCount === 4) {
+		return true;
+	} else {
+		console.log("rightCount:", rightCount);
+		console.log('debuggingArray:', debuggingArray);
+	}
+},
 
-//     }
-// },
 
-// playerOne: function() {
-// 	let $slot = $('<div class="slot"><div>');
-// 	let board = $('.board');
-// 	//board.on('click', $slot, function(event){
-// 	//	$(event.target).css('background-color','red');
-// 	//})
-	
-// },
-// playerTwo: function() {
-// 	let $slot = $('<div class="slot"><div>');
-// 	let board = $('.board');
-// 	board.on('click', $slot, function(event){
-// 		$(event.target).css('background-color','black');
-// 	})
-	
-// },
- 
+checkForWinDiagonal(lastElementClicked){
+var diagonal = this.getDiagonal(lastElementClicked);
+	var rightCount = 0;
+	var debuggingArray = [];
+	for(var potentialCol = diagonal; potentialCol < (4 + diagonal); potentialCol++){
+		var potentialElement = this.getSlotByRowAndColumn(this.getDiagonal(lastElementClicked), potentialCol);
+		debuggingArray.push(potentialElement);
+		if(this.isSameColor(lastElementClicked, potentialElement)) {
+			rightCount++;
+		} else {
+			break;
+		}
+	}
+	if (rightCount === 4) {
+		return true;
+	} 				else {
+										console.log("rightCount:", rightCount);
+										console.log('debuggingArray:', debuggingArray);
+						}
+		},
 
-}
+},
 
 connectFourForTesting = connectFour;
 

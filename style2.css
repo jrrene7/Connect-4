@@ -1,0 +1,35 @@
+body {
+background-size: 100vw 100vh;
+background-repeat: no-repeat; 
+background-image: url('file:///Users/JR/GA%20projects/project%201/Connect%204%20cover.jpg');
+}
+
+
+.cover {
+display: inline-block;
+color: purple;
+text-align: center;
+background-color: black;
+opacity: 0.8;
+margin: 0;
+margin-left: 380px;
+margin-top: 80px;
+padding-top: 40px;
+width: 400px;
+height: 300px;
+
+
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	color: purple;
+	opacity: 1.0
+
+	font-family: blippo fantasy;
+}
